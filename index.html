@@ -4,6 +4,7 @@
 <title>一键生成orzRatingCode</title>
 
 <head>
+    <script>console.log("啊！被你发现我了Σ( ° △ °|||)︴\n你怎么打开了控制台啊，\n本人js新人，千万不要看我的代码，写的很烂ww");</script>
     <h1 align="left">
         <font color="blue"  size="7">OrzTools</font>
     </h1>
@@ -13,7 +14,7 @@
     
     
     
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
     <p style="font-size: 20px">这是一个Orzmic Rating计算器的配套工具，</p>
 
 
@@ -79,11 +80,12 @@
         function downloadCSV() {
             //获取 输入框的值
             try {
+                //使用try在出错时自动抛出错误
                 var json = document.getElementById("code").value;
                 var jsonobj = JSON.parse(json);
-
-                console.log(jsonobj.CharUnlock.charAt(0))
-                //可能会导致错误的代码
+                //将输入框的值作为json读取
+                
+                
                 var jsonin = {
                     data: [
                         {
@@ -141,7 +143,8 @@
 
                 exportCsv(jsonin);
             } catch (error) {
-                alert("Oops!你的输入好像有问题！");
+                alert("出问题了捏，可能是输入的内容不正确/复制的内容不完整");
+                console.log("有人输入了无效的信息我不说是谁");
                 //在错误发生时怎么处理
 
             }
