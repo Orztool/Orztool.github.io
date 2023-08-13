@@ -36,19 +36,17 @@
 
 
         function exportCsv(obj) {
-
-            var titleForKey = Object.keys(obj.data[0]);
-            var data = obj.data;
             var str = [];
-
-            for (var i = 0; i < data.length; i++) {
-                var temp = [];
-                for (var j = 0; j < titleForKey.length; j++) {
-                    temp.push(data[i][titleForKey[j]]);
-                }
-                str.push(temp.join(",") + "\n");
-            }
-            //按顺序插入data里面的逐个数值
+            str.push("Ver,");//新建栏目Ver并且插入它的值
+            str.push(obj.Ver+ "\n");
+            str.push("Name,");//新建栏目Name并且插入它的值
+            str.push(obj.Name+ "\n");
+            str.push("Coin,");//新建栏目Coin并且插入它的值
+            str.push(obj.Coin+ "\n");
+            str.push("CharID,");//新建栏目CharID并且插入它的值
+            str.push(obj.CharID+ "\n");
+            str.push("CharSkinID,");//新建栏目CharSkinID并且插入它的值
+            str.push(obj.CharSkinID+ "\n");
             var titleForCLU = Object.keys(obj.CharUnlock[0]);
             var charUnlock = obj.CharUnlock;
             str.push("CharUnlock,");//给这一栏命名
@@ -74,11 +72,11 @@
             });
             var downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = "export.csv";
+            downloadLink.download = "export.csv";//最后下载这个文件
             downloadLink.click();
         }
         function downloadCSV() {
-            //获取 输入框的值
+            //获取 输入框的值，点击按钮就触发
             try {
                 //使用try在出错时自动抛出错误
                 var json = document.getElementById("code").value;
@@ -87,29 +85,11 @@
                 
                 
                 var jsonin = {
-                    data: [
-                        {
-                            name: "Ver",
-                            table1: jsonobj.Ver,
-
-                        }, {
-                            name: "Name",
-                            table1: jsonobj.Name,
-
-
-                        }, {
-                            name: "Coin",
-                            table1: jsonobj.Coin
-                        }, {
-                            name: "CharID",
-                            table1: jsonobj.CharID,
-
-                        }, {
-                            name: "CharSkinID",
-                            table1: jsonobj.CharSkinID,
-
-                        }
-                    ],
+                    Ver:jsonobj.Ver,
+                    Name:jsonobj.Name,
+                    Coin:jsonobj.Coin,
+                    CharID:jsonobj.CharID,
+                    CharSkinID:jsonobj.CharSkinID,
                     CharUnlock: [
                         {
                             table0: jsonobj.CharUnlock.charAt(0),
@@ -141,7 +121,7 @@
                     SPScores:jsonobj.SPScores
                 }
 
-                exportCsv(jsonin);
+                exportCsv(jsonin);//把json数据传给导出csv的函数
             } catch (error) {
                 alert("出问题了捏，可能是输入的内容不正确/复制的内容不完整");
                 console.log("有人输入了无效的信息我不说是谁");
