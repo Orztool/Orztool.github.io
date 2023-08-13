@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<title>一键生成orzRatingCode</title>
+
+<head>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <p style="font-size: 20px">这是一个Orzmic Rating计算器的配套工具，</p>
+
+
+    <p style="font-size: 20px">用于将RatingCode中的文本转化为csv格式:</p>
+
+    <p style="font-size: 20px">请在下面输入你的二维码中获取的所有内容</p>
+
+    <input type="text" id="code" name="code" style="width:500px; height:40px;" />
+
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="author" content="">
+
+    <script>
+
+
+
+        function exportCsv(obj) {
+
+            var titleForKey = Object.keys(obj.data[0]);
+            var data = obj.data;
+            var str = [];
+
+            for (var i = 0; i < data.length; i++) {
+                var temp = [];
+                for (var j = 0; j < titleForKey.length; j++) {
+                    temp.push(data[i][titleForKey[j]]);
+                }
+                str.push(temp.join(",") + "\n");
+            }
+            //按顺序插入data里面的逐个数值
+            var titleForCLU = Object.keys(obj.CharUnlock[0]);
+            var charUnlock = obj.CharUnlock;
+            str.push("CharUnlock,");//给这一栏命名
+            for (var i = 0; i < charUnlock.length; i++) {
+                var temp = [];
+                for (var j = 0; j < titleForCLU.length; j++) {
+                    temp.push(charUnlock[i][titleForCLU[j]]);
+                }
+                str.push(temp.join(",") + "\n");
+            }//按顺序插入CharUnlock里面的逐个数值
+            str.push("Rat,");//新建栏目rat并且插入它的值
+            str.push(obj.Rat+ "\n");
+            str.push("SPRat,");//新建栏目SPRat并且插入它的值
+            str.push(obj.SPRat+ "\n");
+            str.push("Prog,");//新建栏目SPRat并且插入它的值
+            str.push(obj.Prog+ "\n");
+            str.push("SPScores,");//新建栏目SPScores并且插入它的值
+            str.push(obj.SPScores+ "\n");
+            str.push("B20Scores,");//新建栏目B20Scores并且插入它的值
+            str.push(obj.B20Scores+ "\n");
+            var blob = new Blob(['\uFEFF' + str.join('')], {
+                type: 'text/plain;charset=utf-8',
+            });
+            var downloadLink = document.createElement("a");
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = "export.csv";
+            downloadLink.click();
+        }
+        function downloadCSV() {
+            //获取 输入框的值
+            try {
+                var json = document.getElementById("code").value;
+                var jsonobj = JSON.parse(json);
+
+                console.log(jsonobj.CharUnlock.charAt(0))
+                //可能会导致错误的代码
+                var jsonin = {
+                    data: [
+                        {
+                            name: "Ver",
+                            table1: jsonobj.Ver,
+
+                        }, {
+                            name: "Name",
+                            table1: jsonobj.Name,
+
+
+                        }, {
+                            name: "Coin",
+                            table1: jsonobj.Coin
+                        }, {
+                            name: "CharID",
+                            table1: jsonobj.CharID,
+
+                        }, {
+                            name: "CharSkinID",
+                            table1: jsonobj.CharSkinID,
+
+                        }
+                    ],
+                    CharUnlock: [
+                        {
+                            table0: jsonobj.CharUnlock.charAt(0),
+                            table1: jsonobj.CharUnlock.charAt(1),
+                            table2: jsonobj.CharUnlock.charAt(2),
+                            table3: jsonobj.CharUnlock.charAt(3),
+                            table4: jsonobj.CharUnlock.charAt(4),
+                            table5: jsonobj.CharUnlock.charAt(5),
+                            table6: jsonobj.CharUnlock.charAt(6),
+                            table7: jsonobj.CharUnlock.charAt(7),
+                            table8: jsonobj.CharUnlock.charAt(8),
+                            table9: jsonobj.CharUnlock.charAt(9),
+                            table10: jsonobj.CharUnlock.charAt(10),
+                            table11: jsonobj.CharUnlock.charAt(11),
+                            table12: jsonobj.CharUnlock.charAt(12),
+                            table13: jsonobj.CharUnlock.charAt(13),
+                            table14: jsonobj.CharUnlock.charAt(14),
+                            table15: jsonobj.CharUnlock.charAt(15),
+                            table16: jsonobj.CharUnlock.charAt(16),
+                            table17: jsonobj.CharUnlock.charAt(17),
+                            table18: jsonobj.CharUnlock.charAt(18),
+                            table19: jsonobj.CharUnlock.charAt(19),
+                        }
+                    ],
+                    Rat:jsonobj.Rat,
+                    SPRat:jsonobj.SPRat,
+                    Prog:jsonobj.Prog,
+                    B20Scores:jsonobj.B20Scores,
+                    SPScores:jsonobj.SPScores
+                }
+
+                exportCsv(jsonin);
+            } catch (error) {
+                alert("Oops!你的输入好像有问题！");
+                //在错误发生时怎么处理
+
+            }
+
+        }
+        window.onload = function () {
+            document.getElementById("downloadcsv").onclick = function () {
+                downloadCSV();
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <br>
+    <button style="width:100px; height:50px; font-size: 30px" id="downloadcsv" href="javascript:;">导出</button>
+    <br><br>
+    作者：
+    <a href="https://space.bilibili.com/1333478733">@Daniel-lin-</a>
+    <br>
+    QQ:<a href="https://qm.qq.com/cgi-bin/qm/qr?k=cUojLoZsBE0HvCHgOjuZOGNiJkZ06-z0&noverify=0&personal_qrcode_source=3">@2370408621</a>
+    <br><br>
+    鸣谢：
+    <br>
+    
+    <a href="https://space.bilibili.com/518645556">@思昔不咕咕</a>提供的OrzmicRatingCode内容破译
+    <br>
+    <a href="https://space.bilibili.com/550984227">@Star沐染</a>提供的Python算法思路，给了我很大的启发。
+</body>
+
+</html>
