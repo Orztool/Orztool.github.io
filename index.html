@@ -67,9 +67,11 @@
             str.push(obj.SPScores+ "\n");
             str.push("B20Scores,");//新建栏目B20Scores并且插入它的值
             str.push(obj.B20Scores+ "\n");
+            
             var blob = new Blob(['\uFEFF' + str.join('')], {
                 type: 'text/plain;charset=utf-8',
             });
+            
             var downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.download = "export.csv";//最后下载这个文件
@@ -146,6 +148,9 @@
     （如果点击后没有提示下载CSV文件，请更新你的浏览器版本）
     <br>
     （请不要在QQ/微信内置的浏览器打开！会导致异常错误）
+    <br>
+    （如果你是来获取bot需要的信息，你只需要解析完二维码就行了！不需要导出csv！也不需要输入到框框）
+    
     <br><br>
     作者：
     <a href="https://space.bilibili.com/1333478733">B站@Daniel-lin-</a>
