@@ -9,7 +9,7 @@
         <font color="blue"  size="7">OrzTools</font>
     </h1>
     <h1 align="left">
-        <font color="red"  size="2">（ver1.0.0，上次更新于20230813）</font>
+        <font color="red"  size="2">（ver2.0.0，上次更新于20231222）</font>
     </h1>
     
     
@@ -65,8 +65,8 @@
             str.push(obj.Prog+ "\n");
             str.push("SPScores,");//新建栏目SPScores并且插入它的值
             str.push(obj.SPScores+ "\n");
-            str.push("B20Scores,");//新建栏目B20Scores并且插入它的值
-            str.push(obj.B20Scores+ "\n");
+            str.push("B30Scores,");//新建栏目B20Scores并且插入它的值
+            str.push(obj.B30Scores+ "\n");
             
             var blob = new Blob(['\uFEFF' + str.join('')], {
                 type: 'text/plain;charset=utf-8',
@@ -114,6 +114,7 @@
                             table17: jsonobj.CharUnlock.charAt(17),
                             table18: jsonobj.CharUnlock.charAt(18),
                             table19: jsonobj.CharUnlock.charAt(19),
+                            table20: jsonobj.CharUnlock.charAt(20),
                         }
                     ],
                     Rat:jsonobj.Rat,
