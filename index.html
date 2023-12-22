@@ -36,6 +36,7 @@
 
 
         function exportCsv(obj) {
+            console.log(obj);
             var str = [];
             str.push("Ver,");//新建栏目Ver并且插入它的值
             str.push(obj.Ver+ "\n");
@@ -76,6 +77,7 @@
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.download = "export.csv";//最后下载这个文件
             downloadLink.click();
+            //console.log(obj.B30Scores)
         }
         function downloadCSV() {
             //获取 输入框的值，点击按钮就触发
@@ -120,7 +122,7 @@
                     Rat:jsonobj.Rat,
                     SPRat:jsonobj.SPRat,
                     Prog:jsonobj.Prog,
-                    B20Scores:jsonobj.B20Scores,
+                    B30Scores:jsonobj.B30Scores,
                     SPScores:jsonobj.SPScores
                 }
 
